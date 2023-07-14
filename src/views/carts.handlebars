@@ -1,0 +1,21 @@
+<div class="col-md-5 py-3 overflow-auto h-80">
+      <div id="notes">
+        <div>
+          {{#each cart.products}}
+            <div>
+              <div class="card card-body rounded-2 mb-2 animate__animated animate__fadeInUp background">
+                <div class="d-flex justify-content-between">
+                
+                  <h1 class="h2 card-title">Cantidad:{{this.quantity}} </h2>
+                  <h2 class="h2 card-title">Id del producto{{this._id}} </h2>
+
+                </div>
+                <p>{{this.description}}</p> 
+              </div>
+            </div>
+          {{else}}
+            <p>No hay productos disponibles.</p>
+          {{/each}}
+        </div>
+      </div>
+  </div>

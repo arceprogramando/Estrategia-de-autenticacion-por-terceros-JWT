@@ -1,0 +1,38 @@
+{
+  "name": "segunda-pre-entrega-del-proyecto-final",
+  "version": "1.0.0",
+  "description": "[![Coderhouse](https://res.cloudinary.com/hdsqazxtw/image/upload/v1570710978/coderhouse.jpg)](https://github.com/arceprogramando)",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start:dev": "cross-env NODE_ENV=development nodemon ./src/app.js",
+    "start:prod": "cross-env NODE_ENV=production nodeomn ./src/app.js",
+    "start:test": "cross-env NODE_ENV=test nodemon ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Felipe Arce",
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^5.0.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "express-routemap": "^1.6.0",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.3.1",
+    "mongoose-paginate-v2": "^1.7.1",
+    "multer": "^1.4.5-lts.1",
+    "session-file-store": "^1.5.0",
+    "socket.io": "^4.7.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.44.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "nodemon": "^2.0.22"
+  }
+}
