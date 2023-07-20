@@ -1,13 +1,11 @@
 const authMdw = (req, res, next) => {
   // eslint-disable-next-line no-console
-  console.log('🚀 ~ file: auth.middleware.js:3 ~ authMdw ~ req:', req);
-  if (req.sessiom?.user === 'felipe' || req.session.admin) {
+  console.log('Validando Sesion');
+
+  if (req.session?.user === 'adminCoder@coder.com' && req.session?.admin) {
     return next();
   }
-
-  return res.status(401).json({
-    message: 'Unauthorized access',
-  });
+  return res.redirect('/login');
 };
 
 export default authMdw;

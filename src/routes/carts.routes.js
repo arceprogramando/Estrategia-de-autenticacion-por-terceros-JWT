@@ -6,13 +6,12 @@ const router = Router();
 
 // Creacion Create ("C".R.U.D) Para crear un nuevo carrito
 
-router.post('/api/carts', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { products } = req.body;
-    console.log(products);
 
     const cartItems = products.map((product) => ({
-      products: product.products,
+      product: product.product,
       quantity: product.quantity,
     }));
 
@@ -29,7 +28,7 @@ router.post('/api/carts', async (req, res) => {
 
 // Creacion Create ("C".R.U.D) Agrega o modifica un producto en un carrito existente
 
-router.post('/api/carts/:cid/product/:pid', async (req, res) => {
+router.post('/:cid/product/:pid', async (req, res) => {
   try {
     const { cid, pid } = req.params;
     const { quantity } = req.body;
@@ -57,7 +56,7 @@ router.post('/api/carts/:cid/product/:pid', async (req, res) => {
 
 // Lectura Read (C."R".U.D) Lectura de todas las carts creadas
 
-router.get('/api/carts', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const { limit } = req.query;
     let query = CartModel.find({});
@@ -81,25 +80,23 @@ router.get('/api/carts', async (req, res) => {
 
 // Lectura Read (C."R".U.D) Lectura de carts por id
 
-router.get('/api/carts/:cid', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const { cid } = req.params;
-    const cart = await CartModel.findById(cid).populate('products');
-    // eslint-disable-next-line no-console
-    console.log(cart);
-    if (cart) {
-      res.status(200).json(cart);
-    } else {
-      res.status(404).json({ error: 'La búsqueda del id del carrito no existe' });
+    const cart = await CartModel.findById({ _id: req.params.id }).populate('products.product');
+
+    if (!cart) {
+      return res.status(404).json({ error: 'Carrito no encontrado' });
     }
+
+    return res.status(200).json(cart);
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener el carrito' });
+    return res.status(500).json({ error: `Error al obtener el carrito ${error}` });
   }
 });
 
 // Actualizacion Update (C.R."U".D)
 
-router.put('/api/carts/:cid', async (req, res) => {
+router.put('/:cid', async (req, res) => {
   try {
     const { cid } = req.params;
     const { products } = req.body;
@@ -117,12 +114,12 @@ router.put('/api/carts/:cid', async (req, res) => {
 
 // Actualizacion Update (C.R."U".D) sobre la cantidad de el id de un producto dentro de una cart
 
-router.put('/api/carts/:cid/products/:pid', async (req, res) => {
+router.put('/:cid/products/:pid', async (req, res) => {
   try {
     const { cid, pid } = req.params;
     const { quantity } = req.body;
 
-    const cart = await CartModel.findById(cid);
+    const cart = await CartModel.findById({ _id: cid });
     if (!cart) {
       return res.status(404).json({ error: 'El carrito no existe' });
     }
@@ -143,7 +140,7 @@ router.put('/api/carts/:cid/products/:pid', async (req, res) => {
 
 // Borrar Delete (C.R.U."D")
 
-router.delete('/api/carts/:cid', async (req, res) => {
+router.delete('/carts/:cid', async (req, res) => {
   try {
     const { cid } = req.params;
     const cart = await CartModel.findByIdAndDelete(cid);
@@ -160,11 +157,11 @@ router.delete('/api/carts/:cid', async (req, res) => {
 
 // Borrar Delete (C.R.U.D) Por id de carrito e id de producto de referencia
 
-router.delete('/api/carts/:cid/products/:pid', async (req, res) => {
+router.delete('/:cid/products/:pid', async (req, res) => {
   try {
     const { cid, pid } = req.params;
 
-    const cart = await CartModel.findById(cid);
+    const cart = await CartModel.findById({ _id: cid });
     if (!cart) {
       return res.status(404).json({ error: 'El carrito no existe' });
     }

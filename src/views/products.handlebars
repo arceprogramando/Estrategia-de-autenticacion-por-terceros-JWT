@@ -15,6 +15,15 @@
     </div>
   {{/if}}
 </div>
+  <p>Rol: {{#if user.admin}}Administrador{{else}}Usuario{{/if}}</p>
+  <p>Visit : {{this.visit}}</p>
+  <div>
+    <h3>eliminando la Cuenta</h3>
+    <form action="/api/session/logout" method="get">
+      <button type="submit">clearSession</button>
+    </form>
+
+  </div>
 <div class="container h-100">
   <div class="row h-100">
     <div class="col-md-4 my-auto">

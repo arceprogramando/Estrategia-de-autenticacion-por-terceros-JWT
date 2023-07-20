@@ -3,33 +3,11 @@ import { Router } from 'express';
 import productModel from '../dao/models/products.models.js';
 import uploadMiddleware from '../services/uploader.js';
 
-// import productData from '../data/products.js'; //Insercion de mockaro products random
-
 const router = Router();
-
-// Aca esta la forma en la cual hice la insercion con mockaro siguiendo la prueba del profesor. Cree otra base de datos desde el .env
-
-// router.get('/insertion', async (req, res) => {
-//   try {
-//     const result = await productModel.insertMany(productData);
-
-//     return res.json({
-//       message: 'bulk insertion successfully',
-//       students: result,
-//     });
-//   } catch (error) {
-//     // eslint-disable-next-line no-console
-//     console.log(
-//       '🚀 ~ file: students.routes.js:19 ~ router.get ~ error:',
-//       error,
-//     );
-//     return res.status(500).send({ status: 'error', error: 'Error al enviar la insercion de productos' });
-//   }
-// });
 
 // Creacion Create ("C".R.U.D)
 
-router.post('/api/products', uploadMiddleware, async (req, res) => {
+router.post('/', uploadMiddleware, async (req, res) => {
   try {
     const {
       title, description, code, price, status, stock, category,
@@ -69,7 +47,7 @@ router.post('/api/products', uploadMiddleware, async (req, res) => {
 
 // Lectura Read (C."R".U.D)
 
-router.get('/api/products', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const {
       limit, page = 1, sort, query,
@@ -127,7 +105,7 @@ router.get('/api/products', async (req, res) => {
 
 // Lectura Read (C."R".U.D) por id usando findByID de mongoose
 
-router.get('/api/products/:pid', async (req, res) => {
+router.get('/:pid', async (req, res) => {
   try {
     const product = await productModel.findById({ _id: req.params.pid });
 
@@ -143,7 +121,7 @@ router.get('/api/products/:pid', async (req, res) => {
 
 // Actualizacion Update (C.R."U".D)
 
-router.put('/api/products/:pid', uploadMiddleware, async (req, res) => {
+router.put('/:pid', uploadMiddleware, async (req, res) => {
   try {
     const { pid } = req.params;
     const {
@@ -196,7 +174,7 @@ router.put('/api/products/:pid', uploadMiddleware, async (req, res) => {
 
 // Borrar Delete (C.R.U."D")
 
-router.delete('/api/products/:pid', async (req, res) => {
+router.delete('/:pid', async (req, res) => {
   try {
     const { pid } = req.params;
 

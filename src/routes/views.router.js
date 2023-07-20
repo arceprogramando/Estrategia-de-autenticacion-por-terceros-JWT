@@ -1,22 +1,14 @@
 import { Router } from 'express';
 import productModel from '../dao/models/products.models.js';
-import configObject from '../config/config.js';
 import messageModel from '../dao/models/message.models.js';
-import cartModel from '../dao/models/carts.models.js';
+import CartModel from '../dao/models/carts.models.js';
+import authMdw from '../middlewares/auth.middleware.js';
 
 const router = Router();
-const { PORT } = configObject;
 
 router.get('/', async (req, res) => {
-  const findproducts = await productModel.find();
-  const products = findproducts.map((product) => product.toObject());
-  const { cookie } = req;
-
-  res.render('home', {
-    cookie,
-    products,
+  res.render('login', {
     style: 'index.css',
-    port: PORT,
   });
 });
 
@@ -42,7 +34,17 @@ router.get('/products', async (req, res) => {
       docs, hasPrevPage, hasNextPage, nextPage, prevPage,
     } = await productModel.paginate(query, options);
 
+    let visit;
+    if (req.session.counter) {
+      req.session.counter += 1;
+      visit = `Se ha visitado el sitio ${req.session.counter} veces`;
+    } else {
+      req.session.counter = 1;
+      visit = 'Se ha visitado el sitio 1 vez';
+    }
+
     res.render('products', {
+      visit,
       products: docs,
       style: 'index.css',
       page,
@@ -50,6 +52,7 @@ router.get('/products', async (req, res) => {
       hasNextPage,
       prevPage,
       nextPage,
+      user: req.session.user,
     });
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener los productos' });
@@ -72,8 +75,7 @@ router.get('/chat', async (req, res) => {
 
 router.get('/carts/:id', async (req, res) => {
   try {
-    const cartId = req.params.id;
-    const cart = await cartModel.findById(cartId).populate('products');
+    const cart = await CartModel.findById({ _id: req.params.id }).populate('products.product');
 
     if (!cart) {
       return res.status(404).json({ error: 'Carrito no encontrado' });
@@ -81,11 +83,26 @@ router.get('/carts/:id', async (req, res) => {
 
     return res.render('carts', {
       cart: cart.toObject(),
-      style: 'index.css',
+      style: '../../css/index.css',
     });
   } catch (error) {
-    return res.status(500).json({ error: 'Error al obtener el carrito' });
+    return res.status(500).json({ error: `Error al obtener el carrito ${error}` });
   }
+});
+
+router.get('/register', async (req, res) => {
+  res.render('register');
+});
+
+// router.get('/login', async (req, res) => {
+//   res.render('login');
+// });
+
+router.get('/profile', authMdw, async (req, res) => {
+  const { user } = req.session;
+  res.render('profile', {
+    user,
+  });
 });
 
 export default router;

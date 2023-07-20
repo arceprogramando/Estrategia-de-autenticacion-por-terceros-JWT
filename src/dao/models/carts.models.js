@@ -14,9 +14,17 @@ const cartItemSchema = new Schema({
 });
 
 const cartSchema = new Schema({
-  products: [cartItemSchema],
+  products: {
+    type: [cartItemSchema],
+    default: [],
+  },
 });
 
 const CartModel = model(cartsCollection, cartSchema);
 
+/* Tambien puedo usar (
+Schema.pre('find',function(){
+  this.populate('notes.note')
+}) // Para hacer generico el populate
+  */
 export default CartModel;

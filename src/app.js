@@ -2,9 +2,10 @@
 
 import express from 'express';
 import cors from 'cors';
-import fileStore from 'session-file-store';
+// import fileStore from 'session-file-store';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
+import mongoStore from 'connect-mongo';
 import displayRoutes from 'express-routemap';
 import { engine } from 'express-handlebars';
 import { Server } from 'socket.io';
@@ -15,23 +16,16 @@ import productRouter from './routes/products.routes.js';
 import mongoDBConnection from './dao/db/config/mongo.config.js';
 import cartRouter from './routes/carts.routes.js';
 import messageRouter from './routes/message.routes.js';
+import sessionRoutes from './routes/session.routes.js';
+// Cookies
+import cookiesRouter from './routes/cookies.routes.js';
 
-const FileStorage = fileStore(session);
 const app = express();
 const env = configObject;
-
 // Middleware
 app.use(cors());
 app.use(cookieParser());
-app.use(session({
-  // ttl = Time To Live. Vida de la sesion
-  // retries = Tiempo de veces que el servidor tratara de leer el archivos
-  // path = ruta donde vivira la carpeta para almacenar la sesion
-  store: new FileStorage({ path: './sessions', ttl: 100, retries: 0 }),
-  secret: 'secretCoder',
-  resave: false,
-  saveUninitialized: false,
-}));
+
 app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,6 +36,22 @@ app.set('view engine', 'handlebars');
 
 app.set('PORT', env.PORT || 8080);
 app.set('NODE_ENV', env.NODE_ENV || 'development');
+
+app.use(
+  session({
+    store: mongoStore.create({
+      mongoUrl: env.DB_CNN,
+      mongoOptions: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      ttl: 50,
+    }),
+    secret: 'mi_clave_secreta',
+    saveUninitialized: false,
+    resave: false,
+  }),
+);
 
 const server = app.listen(app.get('PORT'), () => {
 // eslint-disable-next-line no-console
@@ -56,9 +66,11 @@ const server = app.listen(app.get('PORT'), () => {
 mongoDBConnection();
 
 app.use('/', viewsRouter);
-app.use('/', productRouter);
-app.use('/', cartRouter);
-app.use('/', messageRouter);
+app.use('/api/products', productRouter);
+app.use('/api/carts', cartRouter);
+app.use('/api/chat', messageRouter);
+app.use('/api/cookies', cookiesRouter);
+app.use('/api/session', sessionRoutes);
 
 const io = new Server(server);
 

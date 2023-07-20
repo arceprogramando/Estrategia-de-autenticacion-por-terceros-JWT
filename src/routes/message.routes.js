@@ -5,7 +5,7 @@ const router = Router();
 
 // Creación Create ("C".R.U.D)
 
-router.post('/api/chat', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { user, message } = req.body;
 
@@ -33,7 +33,7 @@ router.post('/api/chat', async (req, res) => {
 
 // Lectura Read (C."R".U.D)
 
-router.get('/api/chat', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const findmessage = await messageModel.find({});
     const messages = findmessage.map((message) => message.toObject());
