@@ -170,7 +170,7 @@ npm install nodemon -D
 
 ### Todos los paquetes en 1 
 ```sh
-npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser cookie-session session-file-store connect-mongo
+npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser express-session session-file-store connect-mongo
 
 npm install crossenv nodemon -D
 
@@ -242,7 +242,7 @@ npm install dotenv
 
 ```
 
-Onceavo instalamos [express-routemap](https://www.npmjs.com/package/express-routemap) para poder mapear nuestro conjunto de rutas a utilizar o en uso
+Undécimo instalamos [express-routemap](https://www.npmjs.com/package/express-routemap) para poder mapear nuestro conjunto de rutas a utilizar o en uso
 
 
 ```sh
@@ -250,19 +250,27 @@ npm install express-routemap
 
 ```
 
+Duodécimo instalamos [cookie-parser](https://www.npmjs.com/package/cookie-parser) que se utiliza para analizar las cookies en las solicitudes entrantes y hacerlas accesibles en req.cookies.
+
 ```sh
 npm install cookie-parser
 
 ```
+
+Decimotercero instalamos [express-session](https://www.npmjs.com/package/express-session) que se utiliza para manejar sesiones en Express y permite almacenar y acceder a datos de sesión en cada solicitud a través de req.session
+
 ```sh
-npm install cookie-session
+npm install express-session
 
 ```
+Decimocuarto instalamos [session-file-store](https://www.npmjs.com/package/session-file-store) para manejar como archivos en session las sesiones conectadas a base de datos
 
 ```sh
 npm install session-file-store
 
 ```
+
+DecimoQuinta instalamos [connect-mongo](https://www.npmjs.com/package/connect-mongo) que es una dependencia importante para conectar las sesiones de Express con MongoDB
 ```sh
 npm install connect-mongo
 
@@ -304,6 +312,6 @@ http://localhost:8080/api/chat
   [bootstrap]:<https://getbootstrap.com>
   [mongoose-paginate-v2]:<https://www.npmjs.com/package/mongoose-paginate-v2>
   [cookie-parser]:<https://www.npmjs.com/package/cookie-parser>
-  [cookie-session]:<https://www.npmjs.com/package/cookie-session>
+  [express-session]:<https://www.npmjs.com/package/express-session>
   [session-file-store]:<https://www.npmjs.com/package/session-file-store>
   [connect-mongo]:<https://www.npmjs.com/package/connect-mongo>
