@@ -1,4 +1,4 @@
-# Login Por Formulario
+# Estrategia de autenticacion por terceros
 ## _Felipe Antonio Aleman Arce_
 ### Ejercicio 9 entregable , Estrategia de autenticacion por terceros ( No Finalizada)
 [![Coderhouse](https://res.cloudinary.com/hdsqazxtw/image/upload/v1570710978/coderhouse.jpg)](https://github.com/arceprogramando)
@@ -12,16 +12,18 @@ Estoy haciendo esto para poder tener un ejemplo de como hacer un readme a la hor
 - Motores de plantillas✔️
 - Primera practica integradora ((>‿◠)✌) ✔️
 - Segunda Preentrega del Proyecto Final((>‿◠)✌) ✔️
-- Login Por Formulario(no finalizada)
-- ✨Estrategia de autenticacion por terceros✨ (no finalizada)
+- Login Por Formulario ✔️
+- Estrategia de autenticacion por terceros (no finalizada)
 
 ## Desafio Entregable
-#  Login Por Formulario
+#  Estrategia de autenticacion por terceros
 ### Desarrollar un servidor basado en express donde podamos hacer consultas a nuestro archivo de productos tengamos nuestras rutas
 ### Y manejemos nuestro multer para subir imagenenes desde handlebars, poder integrar socket.io , multer, mongodb, mongoose , mongoatlas
 ### Express Handlebars ,Router , Clases para trabajar con mongoose 
-### Practicamos Indexacion (sin terminar)
-### Login Por formulario (sin terminar)
+### Practicamos Indexacion 
+### Login Por formulario 
+### Agregamos estrategia por tercero (actual)
+
 - Se instalarán las dependencias a partir del comando npm install ✔️
 - Se echará a andar el servidor✔️
 - Se creara las Rutas correspondientes
@@ -37,7 +39,7 @@ Estoy haciendo esto para poder tener un ejemplo de como hacer un readme a la hor
 - Crear una vista “home.handlebars” la cual contenga una lista de todos los productos agregados hasta el momento ✔️
 - demás, crear una vista “realTimeProducts.handlebars”, la cual vivirá en el endpoint “/realtimeproducts” en nuestro views router, ésta contendrá la misma lista de productos, sin embargo, ésta trabajará con websockets. ✔️
 - Uso de sweetalert✔️
-- Si se desea hacer la conexión de socket emits con HTTP, deberás buscar la forma de utilizar el servidor io de Sockets dentro de la petición POST. ¿Cómo utilizarás un emit dentro del POST?(sin terminar)
+- Si se desea hacer la conexión de socket emits con HTTP, deberás buscar la forma de utilizar el servidor io de Sockets dentro de la petición POST. ¿Cómo utilizarás un emit dentro del POST?(sin terminar)❌❔
 - Continuar sobre el proyecto que has trabajado para tu ecommerce y configurar los siguientes elementos:
 - Agregar el modelo de persistencia de Mongo y mongoose a tu proyecto. ✔️
 - Crear una base de datos llamada “ecommerce” dentro de tu Atlas, crear sus colecciones “carts”, “messages”, “products” y sus respectivos schemas. (falta crear schemas de message y carts) ✔️
@@ -62,35 +64,59 @@ Contener todos los Managers (FileSystem y DB) en una carpeta llamada “Dao” �
 - query, el tipo de elemento que quiero buscar (es decir, qué filtro aplicar), en caso de no recibir query, realizar la búsqueda general ✔️
   sort: asc/desc, para realizar ordenamiento ascendente o descendente por precio, en caso de no recibir sort, no realizar ningún ordenamiento ✔️
 - Se deberá poder buscar productos por categoría o por disponibilidad, y se deberá poder realizar un ordenamiento de estos productos de manera ascendente o descendente por precio.✔️
-
-(Esto quedo sin terminar y ademas tengo que agregar las mejoras que dijo el tutor)
-
 - Además, agregar al router de carts los siguientes endpoints:
   DELETE api/carts/:cid/products/:pid deberá eliminar del carrito el producto seleccionado. ✔️
   PUT api/carts/:cid deberá actualizar el carrito con un arreglo de productos con el formato especificado arriba. ✔️
   PUT api/carts/:cid/products/:pid deberá poder actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body ✔️
-- DELETE api/carts/:cid deberá eliminar todos los productos del carrito 
-  Esta vez, para el modelo de Carts, en su propiedad products, el id de cada producto generado dentro del array tiene que hacer referencia al modelo de Products. Modificar la ruta /:cid para que al traer todos los productos, los traiga completos mediante un “populate”. De esta manera almacenamos sólo el Id, pero al solicitarlo podemos desglosar los productos asociados.
-- Crear una vista en el router de views ‘/products’ para visualizar todos los productos con su respectiva paginación. Cada producto mostrado puede resolverse de dos formas:
-  Llevar a una nueva vista con el producto seleccionado con su descripción completa, detalles de precio, categoría, etc. Además de un botón para agregar al carrito.
-  Contar con el botón de “agregar al carrito” directamente, sin necesidad de abrir una página adicional con los detalles del producto.
-Además, agregar una vista en ‘/carts/:cid (cartId) para visualizar un carrito específico, donde se deberán listar SOLO los productos que pertenezcan a dicho carrito. 
+- DELETE api/carts/:cid deberá eliminar todos los productos del carrito ✔️
+- Esta vez, para el modelo de Carts, en su propiedad products, el id de cada producto generado dentro del array tiene que hacer referencia al modelo de Products. Modificar la ruta /:cid para que al traer todos los productos, los traiga completos mediante un “populate”. De esta manera almacenamos sólo el Id, pero al solicitarlo podemos desglosar los productos asociados. ✔️
+- Crear una vista en el router de views ‘/products’ para visualizar todos los productos con su respectiva paginación. Cada producto mostrado puede resolverse de dos formas: ✔️
+- Llevar a una nueva vista con el producto seleccionado con su descripción completa, detalles de precio, categoría, etc. Además de un botón para agregar al carrito.
+- Contar con el botón de “agregar al carrito” directamente, sin necesidad de abrir una página adicional con los detalles del producto.(no se como hacer) ❌❔
+Además, agregar una vista en ‘/carts/:cid (cartId) para visualizar un carrito específico, donde se deberán listar SOLO los productos que pertenezcan a dicho carrito.  ✔️
 
 Tutor : 
 - los productos los tenes en /realtimeproducts... cuando en la presentación de la entrega dice que tiene que estar en /products ✔️
 
 
 - y te falta la vista /carts/:id 
-(Falta arreglar tema _id guardado como objeto de productos visible y no id de referenca )
-
-## (Nos encontramos aca )
-Tutor : Vi que te falta la implementacion de sessions. 
+(Falta arreglar tema _id guardado como objeto de productos visible y no id de referenca )✔️
 
 
+
+### Consignas
+#### Aspectos a incluir
+
+- Debera contar con todas las vistas realizadas en el hands on lab, asi tambien como las rutas de router para procesar el registro y el login.✔️
+- Una vez completado el login , realizar la redireccion directamente a la vista de productos.✔️
+- Agregar a la vista de productos un mensaje de bienvenida con los datos del usuario.✔️
+- Agregar un sistema de roles de manera que si colocamos el login como correo adminCoder@coder.com y la contraseña adminCod3r123, el usuario de la sesion ademas tenga un campo.✔️
+- Todos los usuarios que no sean admin debera contar con un rol "usuario".✔️
+- Implementar boton de "logout" para destruir la sesion y redirigir a la vista de login ✔️
+- Al cargar el proyecto, éste deberá comenzar en la pantalla de login ✔️
+- El proceso de registro deberá guardar en la base de datos al usuario ✔️
+Se regresará al proceso de login y se colocarán las credenciales de manera incorrecta, esto para probar que no se pueda avanzar a la siguiente pantalla. ✔️
+Posteriormente, se colocarán las credenciales de manera correcta, esto para corroborar que se cree una sesión correctamente y que se haga una redirección a la vista de productos. ✔️
+- La vista de productos tendrá en una parte de arriba de la página el mensaje “Bienvenido” seguido de los datos del usuario que se haya logueado (NO mostrar password). Es importante que se visualice el “rol” para ver que aparezca “usuario” o “user”✔️
+- Se presionará el botón de logout y se destruirá la sesión, notando cómo nos redirige a login. ✔️
+Se ingresarán las credenciales específicas de admin indicadas en las diapositivas, el login debe redirigir correctamente y mostrar en los datos del rol: “admin” haciendo referencia a la correcta gestión de roles. ✔️
+- Al no tener un usuario, primero se creará un usuario, para esto, la pantalla de login deberá tener un link de redirección “Regístrate” ✔️
+- Se revisará que edmin NO viva en base de datos, sino que sea una validaciól an que se haga de manera interna en el código.
+✔️
 > Espero que Los ejercicios se encuentren
 > resueltos de buena forma y espero 
 > que lo haya solucionado de forma optima
 
+## (Nos encontramos aca )
+
+
+
+### Estas son cosas que me faltan arreglar
+¿Preguntas para tutor? o para arreglar despues
+-  Si se desea hacer la conexión de socket emits con HTTP, deberás buscar la forma de utilizar el servidor io de Sockets dentro de la petición POST. ¿Cómo utilizarás un emit dentro del POST?(sin terminar) ❔
+- Contar con el botón de “agregar al carrito” directamente, sin necesidad de abrir una página adicional con los detalles del producto.(no se como hacer) ❔
+- Me falta practicar aggregate a mis queries (minuto 50 clase mongo avanzado 2 esta la explicacion)
+- Las rutas para renderizar tengo que acomodarlas con la pagination  (minuto 23 parte 2 mongo avanzado 2 esta la explicacion )
 
 ## Herramientas
 Mi repositorio publico es  [arceprogramando][arceprogramando]
@@ -117,6 +143,7 @@ Para realizar este Ejercicio
 - [express-session]- Para el control de las sesiones activas
 - [session-file-store] - Para el guardado de archivos de sessiones en local
 - [connect-mongo] - Para efectuar la configuracion de session store con la url de mongo
+
 ## Installation
 
 Express and nodemon requires [Node.js](https://nodejs.org/) to run.
@@ -244,14 +271,17 @@ npm install connect-mongo
 
 ```
 http://localhost:8080/
-http://localhost:8080/realtimeproducts
+http://localhost:8080/products
 http://localhost:8080/chat
+http://localhost:8080/carts/:id
 http://localhost:8080/api/products
-http://localhost:8080/api/products/:id
+http://localhost:8080/api/products/:pid
 [http://localhost:8080/api/products?limit=n?sort="asc"|"desc"?page=n]
 http://localhost:8080/api/carts
 http://localhost:8080/api/carts/:cid/product/:pid 
 http://localhost:8080/api/carts/:cid
+http://localhost:8080/api/chat
+
 ```
 
 
