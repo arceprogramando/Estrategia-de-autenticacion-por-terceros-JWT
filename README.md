@@ -219,7 +219,7 @@ npm install express-handlebars
 
 ```
 
-Octavo instalamos mongoose 
+Octavo instalamos [mongoose](https://www.npmjs.com/package/mongoose) 
 
 ```sh
 npm install mongoose
