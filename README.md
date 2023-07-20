@@ -170,7 +170,7 @@ npm install nodemon -D
 
 ### Todos los paquetes en 1 
 ```sh
-npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser express-session session-file-store connect-mongo
+npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser express-session session-file-store connect-mongo b-crypt
 
 npm install crossenv nodemon -D
 
@@ -275,7 +275,12 @@ DecimoQuinta instalamos [connect-mongo](https://www.npmjs.com/package/connect-mo
 npm install connect-mongo
 
 ```
+DecimoSexta instalamos [b-crypt](https://www.npmjs.com/package/bcrypt) dependencia para el manejo del hash de las contraseñas
 
+```sh
+npm install b-crypt
+
+```
 
 ```
 http://localhost:8080/
@@ -326,3 +331,4 @@ http://localhost:8080/api/session/logout
   [express-session]:<https://www.npmjs.com/package/express-session>
   [session-file-store]:<https://www.npmjs.com/package/session-file-store>
   [connect-mongo]:<https://www.npmjs.com/package/connect-mongo>
+  [b-crypt]:<https://www.npmjs.com/package/bcrypt>
