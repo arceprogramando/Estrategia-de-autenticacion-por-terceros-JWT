@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import userModel from '../dao/models/user.model.js';
+import { createHash } from '../utils.js';
 
 const router = Router();
 
@@ -17,16 +18,36 @@ router.get('/', (req, res) => {
 
 router.post('/register', async (req, res) => {
   try {
-    const { body } = req;
-    const newUser = await userModel.create(body);
+    const {
+      firstname, lastname, email, age, password,
+    } = req.body;
+
+    if (!firstname || !lastname || !email || !age || !password) {
+      return res.status(400).json({ state: 'fallido', message: 'Por favor, completa todos los campos.' });
+    }
+
+    const existingUser = await userModel.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ state: 'fallido', message: 'El correo electrónico ya está registrado.' });
+    }
+
+    const newUser = await userModel.create({
+      firstname,
+      lastname,
+      email,
+      age,
+      password: createHash(password),
+    });
+
     // eslint-disable-next-line no-console
     console.log('🚀 ~ file: session.routes.js:13 ~ router.post ~ newUser:', newUser);
-    req.session.user = { ...body };
-    return res.render('login');
+
+    req.session.user = { ...newUser };
+    return res.redirect('/login');
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log('🚀 ~ file: session.routes.js:22 ~ router.post ~ error:', error);
-    return res.status(500).json({ message: 'Hubo un error al registrar el usuario' });
+    return res.status(500).json({ state: 'fallido', message: 'Hubo un error al registrar el usuario.' });
   }
 });
 
