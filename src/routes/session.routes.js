@@ -31,6 +31,10 @@ router.post('/register', async (req, res) => {
       return res.status(409).json({ state: 'fallido', message: 'El correo electrónico ya está registrado.' });
     }
 
+    if (age <= 0) {
+      return res.status(400).json({ state: 'fallido', message: 'La edad debe ser un número positivo.' });
+    }
+
     const newUser = await userModel.create({
       firstname,
       lastname,
