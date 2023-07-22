@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import userModel from '../dao/models/user.model.js';
-import { createHash } from '../utils.js';
+import encrypt from '../utils/encrypts.js';
 
 const router = Router();
 
@@ -22,6 +22,8 @@ router.post('/register', async (req, res) => {
       firstname, lastname, email, age, password,
     } = req.body;
 
+    // eslint-disable-next-line no-console
+    console.log(req.body);
     if (!firstname || !lastname || !email || !age || !password) {
       return res.status(400).json({ state: 'fallido', message: 'Por favor, completa todos los campos.' });
     }
@@ -40,14 +42,14 @@ router.post('/register', async (req, res) => {
       lastname,
       email,
       age,
-      password: createHash(password),
+      password: encrypt.createHash(password),
     });
 
     // eslint-disable-next-line no-console
     console.log('🚀 ~ file: session.routes.js:13 ~ router.post ~ newUser:', newUser);
 
     req.session.user = { ...newUser };
-    return res.redirect('/login');
+    return res.redirect('/');
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log('🚀 ~ file: session.routes.js:22 ~ router.post ~ error:', error);
@@ -69,7 +71,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Contraseña incorrecta' });
     }
 
-    if (email === 'adminCoder@coder.com' && password === 'adminCod3r123') {
+    if (email === 'adminCoder@coder.com') {
       req.session.user = {
         ...findUser,
         password: '',
