@@ -66,7 +66,6 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-
     if (!email || !password) return res.status(400).send({ status: 'fallido', error: 'valores incompletos' });
 
     const findUser = await userModel.findOne(
@@ -83,7 +82,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Usuario no registrado o existente' });
     }
 
-    if (!encrypts.isValidPassword(password, findUser.password)) {
+    if (!findUser.password || !encrypts.isValidPassword(findUser, password)) {
       return res.status(403).send({ status: 'error', error: 'Contraseña incorrecta' });
     }
 
@@ -101,10 +100,11 @@ router.post('/login', async (req, res) => {
         admin: false,
       };
     }
-
     return res.redirect('/products');
   } catch (error) {
-    return res.status(401).json({ message: 'Error  al logear' });
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: session.routes.js:107 ~ router.post ~ error:', error);
+    return res.status(401).json({ message: 'Error al logear' });
   }
 });
 
