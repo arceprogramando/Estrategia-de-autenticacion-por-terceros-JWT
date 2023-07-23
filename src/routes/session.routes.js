@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import userModel from '../dao/models/user.model.js';
-import encrypt from '../utils/encrypts.js';
+import encrypts from '../utils/encrypts.js';
 
 const router = Router();
 
@@ -22,13 +22,19 @@ router.post('/register', async (req, res) => {
       firstname, lastname, email, age, password,
     } = req.body;
 
-    // eslint-disable-next-line no-console
-    console.log(req.body);
     if (!firstname || !lastname || !email || !age || !password) {
       return res.status(400).json({ state: 'fallido', message: 'Por favor, completa todos los campos.' });
     }
 
-    const existingUser = await userModel.findOne({ email });
+    const existingUser = await userModel.findOne(
+      { email },
+      {
+        email: 1,
+        firstname: 1,
+        lastname: 1,
+        password: 1,
+      },
+    );
     if (existingUser) {
       return res.status(409).json({ state: 'fallido', message: 'El correo electrónico ya está registrado.' });
     }
@@ -42,7 +48,7 @@ router.post('/register', async (req, res) => {
       lastname,
       email,
       age,
-      password: encrypt.createHash(password),
+      password: encrypts.createHash(password),
     });
 
     // eslint-disable-next-line no-console
@@ -52,7 +58,7 @@ router.post('/register', async (req, res) => {
     return res.redirect('/');
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.log('🚀 ~ file: session.routes.js:22 ~ router.post ~ error:', error);
+    console.log('🚀 ~ file: session.routes.js:60 ~ router.post ~ error:', error);
     return res.status(500).json({ state: 'fallido', message: 'Hubo un error al registrar el usuario.' });
   }
 });
@@ -61,16 +67,27 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const findUser = await userModel.findOne({ email });
+    if (!email || !password) return res.status(400).send({ status: 'fallido', error: 'valores incompletos' });
+
+    const findUser = await userModel.findOne(
+      { email },
+      {
+        email: 1,
+        firstname: 1,
+        lastname: 1,
+        password: 1,
+      },
+    );
 
     if (!findUser) {
       return res.status(401).json({ message: 'Usuario no registrado o existente' });
     }
 
-    if (findUser.password !== password) {
-      return res.status(401).json({ message: 'Contraseña incorrecta' });
+    if (!encrypts.isValidPassword(password, findUser.password)) {
+      return res.status(403).send({ status: 'error', error: 'Contraseña incorrecta' });
     }
 
+    req.session.user = findUser;
     if (email === 'adminCoder@coder.com') {
       req.session.user = {
         ...findUser,
@@ -87,7 +104,7 @@ router.post('/login', async (req, res) => {
 
     return res.redirect('/products');
   } catch (error) {
-    return res.status(401).json({ message: 'Error al entrar al login' });
+    return res.status(401).json({ message: 'Error  al logear' });
   }
 });
 
