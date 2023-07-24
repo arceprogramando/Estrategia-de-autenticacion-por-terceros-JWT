@@ -153,7 +153,7 @@ router.post('/recover-psw', async (req, res) => {
     });
 
     if (!updateUser) {
-      res.json({ message: 'problemas actualizando la contraseña' });
+      return res.json({ message: 'problemas actualizando la contraseña' });
     }
     return res.render('login');
   } catch (error) {
