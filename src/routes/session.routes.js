@@ -74,49 +74,60 @@ router.get('/failregister', async (req, res) => {
   res.send({ error: 'failed' });
 });
 
-router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    if (!email || !password) return res.status(400).send({ status: 'fallido', error: 'valores incompletos' });
+// router.post('/login', async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     if (!email || !password) return res.status(400).send({ status: 'fallido', error: 'valores incompletos' });
 
-    const findUser = await userModel.findOne(
-      { email },
-      {
-        email: 1,
-        firstname: 1,
-        lastname: 1,
-        password: 1,
-      },
-    );
+//     const findUser = await userModel.findOne(
+//       { email },
+//       {
+//         email: 1,
+//         firstname: 1,
+//         lastname: 1,
+//         password: 1,
+//       },
+//     );
 
-    if (!findUser) {
-      return res.status(401).json({ message: 'Usuario no registrado o existente' });
-    }
+//     if (!findUser) {
+//       return res.status(401).json({ message: 'Usuario no registrado o existente' });
+//     }
 
-    if (!findUser.password || !encrypts.isValidPassword(findUser, password)) {
-      return res.status(403).send({ status: 'error', error: 'Contraseña incorrecta' });
-    }
+//     if (!findUser.password || !encrypts.isValidPassword(findUser, password)) {
+//       return res.status(403).send({ status: 'error', error: 'Contraseña incorrecta' });
+//     }
 
-    req.session.user = findUser;
-    if (email === 'adminCoder@coder.com') {
-      req.session.user = {
-        ...findUser,
-        password: '',
-        admin: true,
-      };
-    } else {
-      req.session.user = {
-        ...findUser,
-        password: '',
-        admin: false,
-      };
-    }
-    return res.redirect('/products');
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('🚀 ~ file: session.routes.js:107 ~ router.post ~ error:', error);
-    return res.status(401).json({ message: 'Error al logear' });
-  }
+//     req.session.user = findUser;
+//     if (email === 'adminCoder@coder.com') {
+//       req.session.user = {
+//         ...findUser,
+//         password: '',
+//         admin: true,
+//       };
+//     } else {
+//       req.session.user = {
+//         ...findUser,
+//         password: '',
+//         admin: false,
+//       };
+//     }
+//     return res.redirect('/products');
+//   } catch (error) {
+//     // eslint-disable-next-line no-console
+//     console.log('🚀 ~ file: session.routes.js:107 ~ router.post ~ error:', error);
+//     return res.status(401).json({ message: 'Error al logear' });
+//   }
+// });
+
+router.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), async(req, res) => {
+  if (!req.user) return res.status(400).send({ status: 'error', error: 'Invalid credentials' })
+  req.session.user = {
+    firstname: req.user.firstname,
+    lastname: req.user.lastname,
+    age: req.user.age,
+    email: req.user.email,
+  },
+  return res.send({ status: 'success', payload: req.user })
 });
 
 router.get('/welcome', async (req, res) => {
