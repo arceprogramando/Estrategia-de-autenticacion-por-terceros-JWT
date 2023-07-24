@@ -339,5 +339,5 @@ http://localhost:8080/api/session/logout
   [session-file-store]:<https://www.npmjs.com/package/session-file-store>
   [connect-mongo]:<https://www.npmjs.com/package/connect-mongo>
   [b-crypt]:<https://www.npmjs.com/package/bcrypt>
-  [passport]<https://www.npmjs.com/package/passport>
-  [passport-local]<https://www.npmjs.com/package/passport-local>
+  [passport]:<https://www.npmjs.com/package/passport>
+  [passport-local]:<https://www.npmjs.com/package/passport-local>
