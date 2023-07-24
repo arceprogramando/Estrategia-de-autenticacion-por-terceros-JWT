@@ -281,12 +281,12 @@ DecimoSexta instalamos [b-crypt](https://www.npmjs.com/package/bcrypt) dependenc
 npm install b-crypt
 
 ```
-decimoséptimo instalamos [passport](https://www.npmjs.com/package/passport) core de creacion de diferentes forma de logearse
+decimoséptimo instalamos [passport](https://www.npmjs.com/package/passport) core passport de creacion de diferentes forma de logearse
 ```sh
 npm install passport
 
 ```
-decimooctavo instalamos [passport-local](https://www.npmjs.com/package/passport-local) que es una estrategia de autenticación que se utiliza con Passport para autenticar a los usuarios utilizando credenciales locales, como nombre de usuario y contraseña
+decimooctavo instalamos [passport-local](https://www.npmjs.com/package/passport-local)  una estrategia de autenticación que se utiliza con Passport para autenticar a los usuarios utilizando credenciales locales, como nombre de usuario y contraseña
 ```sh
 npm install passport-local
 
