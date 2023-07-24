@@ -170,7 +170,7 @@ npm install nodemon -D
 
 ### Todos los paquetes en 1 
 ```sh
-npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser express-session session-file-store connect-mongo b-crypt
+npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser express-session session-file-store connect-mongo b-crypt passport passport-local
 
 npm install crossenv nodemon -D
 
@@ -281,6 +281,17 @@ DecimoSexta instalamos [b-crypt](https://www.npmjs.com/package/bcrypt) dependenc
 npm install b-crypt
 
 ```
+decimoséptimo instalamos [passport](https://www.npmjs.com/package/passport) core de creacion de diferentes forma de logearse
+```sh
+npm install passport
+
+```
+decimooctavo instalamos [passport-local](https://www.npmjs.com/package/passport-local) que es una estrategia de autenticación que se utiliza con Passport para autenticar a los usuarios utilizando credenciales locales, como nombre de usuario y contraseña
+```sh
+npm install passport-local
+
+```
+
 
 ```
 http://localhost:8080/ 
@@ -328,3 +339,5 @@ http://localhost:8080/api/session/logout
   [session-file-store]:<https://www.npmjs.com/package/session-file-store>
   [connect-mongo]:<https://www.npmjs.com/package/connect-mongo>
   [b-crypt]:<https://www.npmjs.com/package/bcrypt>
+  [passport]<https://www.npmjs.com/package/passport>
+  [passport-local]<https://www.npmjs.com/package/passport-local>
