@@ -9,6 +9,7 @@ import mongoStore from 'connect-mongo';
 import displayRoutes from 'express-routemap';
 import { engine } from 'express-handlebars';
 import { Server } from 'socket.io';
+import passport from 'passport';
 import configObject from './config/config.js';
 import __dirname from './utils.js';
 import viewsRouter from './routes/views.router.js';
@@ -17,6 +18,7 @@ import mongoDBConnection from './dao/db/config/mongo.config.js';
 import cartRouter from './routes/carts.routes.js';
 import messageRouter from './routes/message.routes.js';
 import sessionRoutes from './routes/session.routes.js';
+import initializePassport from './config/passport.config.js';
 // Cookies
 // import cookiesRouter from './routes/cookies.routes.js';
 
@@ -45,13 +47,17 @@ app.use(
         useNewUrlParser: true,
         useUnifiedTopology: true,
       },
-      ttl: 20,
+      ttl: 30,
     }),
     secret: 'mi_clave_secreta',
     saveUninitialized: false,
     resave: false,
   }),
 );
+
+initializePassport();
+app.use(passport.initialize());
+app.use(passport.session());
 
 const server = app.listen(app.get('PORT'), () => {
 // eslint-disable-next-line no-console
