@@ -135,4 +135,28 @@ router.get('/logout', (req, res) => {
   });
 });
 
+router.post('/recover-psw', async (req, res) => {
+  try {
+    // eslint-disable-next-line no-console
+    console.log('BODY UPDATE', req.body);
+    const { newpassword, email } = req.body;
+
+    const newPasswordHashed = encrypts.createHash(newpassword);
+    const findUser = await userModel.findOne({ email });
+
+    if (!findUser) {
+      return res.status(401).json({ message: 'Cradenciales invalidas o erroneas'});
+    }
+
+    const updateUser = await userModel.findByIdAndUpdate(findUser._id, {
+      password: newPasswordHashed,
+    });
+
+    
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log('🚀 ~ file: session.routes.js:142 ~ router.post ~ error:', error);
+  }
+});
+
 export default router;
