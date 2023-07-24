@@ -143,6 +143,10 @@ Para realizar este Ejercicio
 - [express-session]- Para el control de las sesiones activas
 - [session-file-store] - Para el guardado de archivos de sessiones en local
 - [connect-mongo] - Para efectuar la configuracion de session store con la url de mongo
+- [bcrypt] - Para el manejo de hasheos 
+- [passport] - El core de passport.js para poder implementar diferentes tipos de estrategias de logeo
+- [passport-local] - Utilizacion de estrategia de logeo local
+- [passport-github2] - Para poder utilizar los requitos del auth de github con passport
 
 ## Installation
 
@@ -170,7 +174,7 @@ npm install nodemon -D
 
 ### Todos los paquetes en 1 
 ```sh
-npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser express-session session-file-store connect-mongo b-crypt passport passport-local
+npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser express-session session-file-store connect-mongo b-crypt passport passport-local passport-github2
 
 npm install crossenv nodemon -D
 
@@ -291,6 +295,12 @@ decimooctavo instalamos [passport-local](https://www.npmjs.com/package/passport-
 npm install passport-local
 
 ```
+decimonoveno instalamos [passport-github2](https://www.npmjs.com/package/passport-github2) para manejar la estrategia de creacion de usuarios con las herramientas e informacion que proporciona github en su conexion con passport
+
+```sh
+npm install passport-github2
+
+```
 
 
 ```
@@ -341,3 +351,4 @@ http://localhost:8080/api/session/logout
   [b-crypt]:<https://www.npmjs.com/package/bcrypt>
   [passport]:<https://www.npmjs.com/package/passport>
   [passport-local]:<https://www.npmjs.com/package/passport-local>
+  [passport-github2]:<https://www.npmjs.com/package/passport-github2>

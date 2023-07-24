@@ -119,16 +119,16 @@ router.get('/failregister', async (req, res) => {
 //   }
 // });
 
-router.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), async(req, res) => {
-  if (!req.user) return res.status(400).send({ status: 'error', error: 'Invalid credentials' })
-  req.session.user = {
-    firstname: req.user.firstname,
-    lastname: req.user.lastname,
-    age: req.user.age,
-    email: req.user.email,
-  },
-  return res.send({ status: 'success', payload: req.user })
-});
+// router.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), async(req, res) => {
+//   if (!req.user) return res.status(400).send({ status: 'error', error: 'Invalid credentials' })
+//   req.session.user = {
+//     firstname: req.user.firstname,
+//     lastname: req.user.lastname,
+//     age: req.user.age,
+//     email: req.user.email,
+//   },
+//   return res.send({ status: 'success', payload: req.user })
+// });
 
 router.get('/welcome', async (req, res) => {
   const { name } = req.query;
