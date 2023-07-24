@@ -145,17 +145,21 @@ router.post('/recover-psw', async (req, res) => {
     const findUser = await userModel.findOne({ email });
 
     if (!findUser) {
-      return res.status(401).json({ message: 'Cradenciales invalidas o erroneas'});
+      return res.status(401).json({ message: 'Cradenciales invalidas o erroneas' });
     }
 
     const updateUser = await userModel.findByIdAndUpdate(findUser._id, {
       password: newPasswordHashed,
     });
 
-    
+    if (!updateUser) {
+      res.json({ message: 'problemas actualizando la contraseña' });
+    }
+    return res.render('login');
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('🚀 ~ file: session.routes.js:142 ~ router.post ~ error:', error);
+  // eslint-disable-next-line no-console
+    console.error('Error al actualizar la contraseña:', error);
+    return res.status(500).json({ status: 'Error al actualizar la contraseña', error: error.message });
   }
 });
 
