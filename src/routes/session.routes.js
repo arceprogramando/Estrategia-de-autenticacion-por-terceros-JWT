@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import passport from 'passport';
 import userModel from '../dao/models/user.model.js';
 import encrypts from '../utils/encrypts.js';
 
@@ -16,51 +17,61 @@ router.get('/', (req, res) => {
   }
 });
 
-router.post('/register', async (req, res) => {
-  try {
-    const {
-      firstname, lastname, email, age, password,
-    } = req.body;
+// router.post('/register', async (req, res) => {
+//   try {
+//     const {
+//       firstname, lastname, email, age, password,
+//     } = req.body;
 
-    if (!firstname || !lastname || !email || !age || !password) {
-      return res.status(400).json({ state: 'fallido', message: 'Por favor, completa todos los campos.' });
-    }
+//     if (!firstname || !lastname || !email || !age || !password) {
+//       return res.status(400).json({ state: 'fallido', message: 'Por favor, completa todos los campos.' });
+//     }
 
-    const existingUser = await userModel.findOne(
-      { email },
-      {
-        email: 1,
-        firstname: 1,
-        lastname: 1,
-        password: 1,
-      },
-    );
-    if (existingUser) {
-      return res.status(409).json({ state: 'fallido', message: 'El correo electrónico ya está registrado.' });
-    }
+//     const existingUser = await userModel.findOne(
+//       { email },
+//       {
+//         email: 1,
+//         firstname: 1,
+//         lastname: 1,
+//         password: 1,
+//       },
+//     );
+//     if (existingUser) {
+//       return res.status(409).json({ state: 'fallido', message: 'El correo electrónico ya está registrado.' });
+//     }
 
-    if (age <= 0) {
-      return res.status(400).json({ state: 'fallido', message: 'La edad debe ser un número positivo.' });
-    }
+//     if (age <= 0) {
+//       return res.status(400).json({ state: 'fallido', message: 'La edad debe ser un número positivo.' });
+//     }
 
-    const newUser = await userModel.create({
-      firstname,
-      lastname,
-      email,
-      age,
-      password: encrypts.createHash(password),
-    });
+//     const newUser = await userModel.create({
+//       firstname,
+//       lastname,
+//       email,
+//       age,
+//       password: encrypts.createHash(password),
+//     });
 
-    // eslint-disable-next-line no-console
-    console.log('🚀 ~ file: session.routes.js:13 ~ router.post ~ newUser:', newUser);
+//     // eslint-disable-next-line no-console
+//     console.log('🚀 ~ file: session.routes.js:13 ~ router.post ~ newUser:', newUser);
 
-    req.session.user = { ...newUser };
-    return res.redirect('/');
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log('🚀 ~ file: session.routes.js:60 ~ router.post ~ error:', error);
-    return res.status(500).json({ state: 'fallido', message: 'Hubo un error al registrar el usuario.' });
-  }
+//     req.session.user = { ...newUser };
+//     return res.redirect('/');
+//   } catch (error) {
+//     // eslint-disable-next-line no-console
+//     console.log('🚀 ~ file: session.routes.js:60 ~ router.post ~ error:', error);
+//     return res.status(500).json({ state: 'fallido', message: 'Hubo un error al registrar el usuario.' });
+//   }
+// });
+
+router.post('/register', passport.authenticate('register', { failureRedirect: '/failregister' }), async (req, res) => {
+  res.send({ status: 'success', message: 'user registered' });
+});
+
+router.get('/failregister', async (req, res) => {
+  // eslint-disable-next-line no-console
+  console.log('Failed Strategy');
+  res.send({ error: 'failed' });
 });
 
 router.post('/login', async (req, res) => {
