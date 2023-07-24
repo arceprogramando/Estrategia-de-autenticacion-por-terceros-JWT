@@ -18,7 +18,7 @@ import cartRouter from './routes/carts.routes.js';
 import messageRouter from './routes/message.routes.js';
 import sessionRoutes from './routes/session.routes.js';
 // Cookies
-import cookiesRouter from './routes/cookies.routes.js';
+// import cookiesRouter from './routes/cookies.routes.js';
 
 const app = express();
 const env = configObject;
@@ -69,7 +69,7 @@ app.use('/', viewsRouter);
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 app.use('/api/chat', messageRouter);
-app.use('/api/cookies', cookiesRouter);
+// app.use('/api/cookies', cookiesRouter);
 app.use('/api/session', sessionRoutes);
 
 const io = new Server(server);
