@@ -45,7 +45,7 @@ app.use(
         useNewUrlParser: true,
         useUnifiedTopology: true,
       },
-      ttl: 50,
+      ttl: 20,
     }),
     secret: 'mi_clave_secreta',
     saveUninitialized: false,

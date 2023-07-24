@@ -283,7 +283,7 @@ npm install b-crypt
 ```
 
 ```
-http://localhost:8080/
+http://localhost:8080/ 
 http://localhost:8080/products
 http://localhost:8080/chat
 http://localhost:8080/carts/:id
@@ -296,10 +296,6 @@ http://localhost:8080/api/carts
 http://localhost:8080/api/carts/:cid/product/:pid 
 http://localhost:8080/api/carts/:cid
 http://localhost:8080/api/chat
-http://localhost:8080/api/cookies
-http://localhost:8080/api/cookies/create
-http://localhost:8080/api/cookies/getcookies
-http://localhost:8080/api/cookies/delete
 http://localhost:8080/api/session/
 http://localhost:8080/api/session/register
 http://localhost:8080/api/session/login
