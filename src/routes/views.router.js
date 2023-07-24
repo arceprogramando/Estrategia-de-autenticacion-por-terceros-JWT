@@ -99,9 +99,11 @@ router.get('/recover', async (req, res) => {
 });
 
 router.get('/profile', authMdw, async (req, res) => {
-  const { user } = req.session;
+  const { user } = req.session.user;
   res.render('profile', {
-    user,
+    lastname: user.lastname || user.firstname,
+    age: user.age,
+    email: user.email,
   });
 });
 
