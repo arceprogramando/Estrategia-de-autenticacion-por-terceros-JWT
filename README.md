@@ -13,7 +13,7 @@ Estoy haciendo esto para poder tener un ejemplo de como hacer un readme a la hor
 - Primera practica integradora ((>‿◠)✌) ✔️
 - Segunda Preentrega del Proyecto Final((>‿◠)✌) ✔️
 - Login Por Formulario ✔️
-- Estrategia de autenticacion por terceros (no finalizada)
+- Estrategia de autenticacion por terceros sin jwt  Finalizada
 
 ## Desafio Entregable
 #  Estrategia de autenticacion por terceros
