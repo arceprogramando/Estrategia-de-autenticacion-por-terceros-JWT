@@ -113,8 +113,8 @@ Se ingresarán las credenciales específicas de admin indicadas en las diapositi
 - Al registrarme con los datos solicitados , se revisara la contraseña guardada en la base de datos, cuidando que esta este correctamente hasheada.✔️
 - Se realizara el proceso de login con las mismas credenciales con las que se registro el usuario, corroborando que el login funcione correctamente y
 redirija a la pantalla principal ✔️
-- Ademas , la pantalla de login debera contar con un boton "entrar con Github" el cual al hacer click nos permita entrar directamente a la pagina con los datos obtenidos de Github.
-- Se corroborara en la base de datos que el nuevo usuario "creado con Github" cuente con un password vacio
+- Ademas , la pantalla de login debera contar con un boton "entrar con Github" el cual al hacer click nos permita entrar directamente a la pagina con los datos obtenidos de Github.✔️
+- Se corroborara en la base de datos que el nuevo usuario "creado con Github" cuente con un password vacio ✔️
 
 ### Estas son cosas que me faltan arreglar
 ¿Preguntas para tutor? o para arreglar despues
@@ -307,7 +307,7 @@ decimonoveno instalamos [passport-github2](https://www.npmjs.com/package/passpor
 npm install passport-github2
 
 ```
-Veinte instalamos [jsonwebtoken](https://jwt.io) para el manejo de json web token
+Veinte instalamos [jsonwebtoken](https://jwt.io) para el manejo de json web token (no utilizada en esta entrega)
 
 ```sh
 npm install jsonwebtoken
@@ -334,6 +334,7 @@ http://localhost:8080/api/session/register
 http://localhost:8080/api/session/login
 http://localhost:8080/api/session/welcome
 http://localhost:8080/api/session/logout
+
 
 ```
 
