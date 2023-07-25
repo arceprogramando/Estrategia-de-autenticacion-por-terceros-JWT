@@ -1,6 +1,6 @@
 # Estrategia de autenticacion por terceros
 ## _Felipe Antonio Aleman Arce_
-### Ejercicio 9 entregable , Estrategia de autenticacion por terceros ( No Finalizada)
+### Ejercicio 9 entregable , Estrategia de autenticacion por terceros Finalizada
 [![Coderhouse](https://res.cloudinary.com/hdsqazxtw/image/upload/v1570710978/coderhouse.jpg)](https://github.com/arceprogramando)
 
 Estoy haciendo esto para poder tener un ejemplo de como hacer un readme a la hora de mostrar un proyecto
