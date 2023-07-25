@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nodemon ./src/app.js",
-    "start:prod": "cross-env NODE_ENV=production nodeomn ./src/app.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon ./src/app.js",
     "start:test": "cross-env NODE_ENV=test nodemon ./src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

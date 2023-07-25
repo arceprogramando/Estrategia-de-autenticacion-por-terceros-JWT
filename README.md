@@ -147,6 +147,7 @@ Para realizar este Ejercicio
 - [passport] - El core de passport.js para poder implementar diferentes tipos de estrategias de logeo
 - [passport-local] - Utilizacion de estrategia de logeo local
 - [passport-github2] - Para poder utilizar los requitos del auth de github con passport
+- [jsonwebtoken] - Para cambiar mi session a jsonwebtoken (no funcional en esta)
 
 ## Installation
 
@@ -174,7 +175,7 @@ npm install nodemon -D
 
 ### Todos los paquetes en 1 
 ```sh
-npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser express-session session-file-store connect-mongo b-crypt passport passport-local passport-github2
+npm install cors dotenv express express-handlebars express-routemap mongoose multer socket.io cookie-parser express-session session-file-store connect-mongo b-crypt passport passport-local passport-github2 jsonwebtoken
 
 npm install crossenv nodemon -D
 
@@ -301,6 +302,12 @@ decimonoveno instalamos [passport-github2](https://www.npmjs.com/package/passpor
 npm install passport-github2
 
 ```
+Veinte instalamos [jsonwebtoken](https://jwt.io) para el manejo de json web token
+
+```sh
+npm install jsonwebtoken
+
+```
 
 
 ```
@@ -352,3 +359,4 @@ http://localhost:8080/api/session/logout
   [passport]:<https://www.npmjs.com/package/passport>
   [passport-local]:<https://www.npmjs.com/package/passport-local>
   [passport-github2]:<https://www.npmjs.com/package/passport-github2>
+  [jsonwebtoken]:<https://jwt.io>

@@ -10,6 +10,8 @@ const {
   DB_CNN,
   DB_HOST,
   DB_NAME,
+  GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET,
 } = process.env;
 
 const configObject = {
@@ -18,6 +20,8 @@ const configObject = {
   DB_CNN,
   DB_HOST,
   DB_NAME,
+  GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET,
 };
 
 export default configObject;
