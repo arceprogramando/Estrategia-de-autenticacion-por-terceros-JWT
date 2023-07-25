@@ -1,49 +1,49 @@
 import passport from 'passport';
-import local from 'passport-local';
+import GitHubStrategy from 'passport-github2';
 import userModel from '../dao/models/user.model.js';
-import encrypt from '../utils/encrypts.js';
+import configObject from './config.js';
 
-const LocalStrategy = local.Strategy;
+const env = configObject;
+
+const { GITHUB_CLIENT_ID } = env;
+const { GITHUB_CLIENT_SECRET } = env;
+const { PORT } = env;
 
 const initializePassport = () => {
-  passport.use('register', new LocalStrategy({
-    passReqToCallback: true,
-    usernameField: 'email',
-  }, async (req, username, password, done) => {
-    const {
-      firstname,
-      lastname,
-      email,
-      age,
-    } = req.body;
+  passport.use('github', new GitHubStrategy({
+    clientID: GITHUB_CLIENT_ID,
+    clientSecret: GITHUB_CLIENT_SECRET,
+    callbackURL: `http://localhost:${PORT}/api/session/github/callback`,
+  }, async (accessToken, refreshToken, profile, done) => {
     try {
-      const findUser = await userModel.findOne({ email: username });
-      if (findUser) {
-        // eslint-disable-next-line no-console
-        console.log('El usuario ya existe');
-        return done(null, false);
-      }
-      const newUser = {
-        firstname,
-        lastname,
-        email,
-        age,
-        password: encrypt.createHash(password),
-      };
-
-      return done(null, newUser);
-    } catch (error) {
       // eslint-disable-next-line no-console
-      console.log('🚀 ~ file: passport.config.js:36 ~ initializePassport ~ error:', error);
-      return done(`Error al obtener el usuario: ${error}`);
+      console.log('🚀 ~ file: passport.config.js:22 ~ initializePassport ~ profile:', profile);
+      const findUser = await userModel.findOne({ email: profile._json?.email });
+
+      if (!findUser) {
+        const addNewUser = {
+          firstname: profile._json.name,
+          lastname: '',
+          email: profile._json?.email,
+          age: 0,
+          password: '',
+        };
+        const newUser = await userModel.create(addNewUser);
+        return done(null, newUser);
+      }
+      return done(null, findUser);
+    } catch (error) {
+      return done(error);
     }
   }));
 
-  passport.serializeUser((user, done) => done(null, user._id));
+  passport.serializeUser((user, done) => {
+    done(null, user._id);
+  });
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await userModel.findById(id);
+      const user = await userModel.findById({ _id: id });
       done(null, user);
     } catch (error) {
       done(error);

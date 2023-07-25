@@ -107,9 +107,14 @@ Se ingresarán las credenciales específicas de admin indicadas en las diapositi
 > resueltos de buena forma y espero 
 > que lo haya solucionado de forma optima
 
-## (Nos encontramos aca )
-
-
+## (Nos encontramos aca ) Refactor a nuestro login
+- Al cargar el proyecto este debera comenzar en la pantalla de login ✔️
+- Al no tener un usuario registrado aun , se procedera a hacer un registro, por lo que la pantalla de login debe tener un link de "registrate", el cual nos redirecione a la pantalla de registro. ✔️
+- Al registrarme con los datos solicitados , se revisara la contraseña guardada en la base de datos, cuidando que esta este correctamente hasheada.✔️
+- Se realizara el proceso de login con las mismas credenciales con las que se registro el usuario, corroborando que el login funcione correctamente y
+redirija a la pantalla principal ✔️
+- Ademas , la pantalla de login debera contar con un boton "entrar con Github" el cual al hacer click nos permita entrar directamente a la pagina con los datos obtenidos de Github.
+- Se corroborara en la base de datos que el nuevo usuario "creado con Github" cuente con un password vacio
 
 ### Estas son cosas que me faltan arreglar
 ¿Preguntas para tutor? o para arreglar despues

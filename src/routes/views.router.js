@@ -99,9 +99,12 @@ router.get('/recover', async (req, res) => {
 });
 
 router.get('/profile', authMdw, async (req, res) => {
-  const { user } = req.session.user;
+  const { user } = req.session;
+  // eslint-disable-next-line no-console
+  console.log(user);
   res.render('profile', {
-    lastname: user.lastname || user.firstname,
+    followers: user.followers,
+    lastname: user.firstname || user.login,
     age: user.age,
     email: user.email,
   });
